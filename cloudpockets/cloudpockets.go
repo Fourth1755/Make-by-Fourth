@@ -19,7 +19,18 @@ type handler struct {
 	db *sql.DB
 }
 
-func (h handler) GetAllCloudPockets(c echo.Context) error {
+func NewApplication(db *sql.DB) *handler {
+	return &handler{db}
+}
+func (h *handler) CreateCloudPockets(c echo.Context) error {
+	var cp CloudPocket
+	err := c.Bind(&cp)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, "bad request body", err.Error())
+	}
+
+}
+func (h *handler) GetAllCloudPockets(c echo.Context) error {
 	//logger := mlog.L(c)
 
 	var cp CloudPocket
