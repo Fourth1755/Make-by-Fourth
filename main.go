@@ -46,7 +46,9 @@ func main() {
 
 	e := echo.New()
 	hCloudPockets := cloudpockets.NewApplication(db)
+
 	e.GET("/cloud-pockets", hCloudPockets.GetAllCloudPockets)
+	e.POST("/cloud-pockets", hCloudPockets.CreateCloudPockets)
 
 	go func() {
 		if err := e.Start(os.Getenv("PORT")); err != nil && err != http.ErrServerClosed {
